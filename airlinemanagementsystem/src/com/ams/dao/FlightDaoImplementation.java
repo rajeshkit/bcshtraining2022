@@ -39,52 +39,97 @@ public class FlightDaoImplementation implements FlightDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return response;
 	}
 
 	@Override
 	public List<Flight> getAllFlights() {
-		String url = "jdbc:derby:C:/Users/rajesh/airline";
-		String query = "select * from flight";
+		//connect to db fire select query get resultset 
+		String url="jdbc:derby:C:/Users/Rajesh/airline";
 		Connection connect=null;
-		List<Flight> listofFoundFlights=new ArrayList<Flight>();
+		Statement stmt = null;
+		List<Flight> list=null;
 		try {
-			connect= DriverManager.getConnection(url);
-			Statement pstmt=connect.createStatement();
-			ResultSet rs=pstmt.executeQuery(query);
+			connect = DriverManager.getConnection(url);
+			stmt = connect.createStatement();
+			ResultSet rs= stmt.executeQuery("select * from flight");
+			list=new ArrayList<Flight>();
 			while(rs.next()) {
 				Flight f=new Flight();
 				f.setFlightId(rs.getInt(1));
-				f.setDestination(rs.getString(3));
 				f.setSource(rs.getString(2));
 				f.setDepartureDate(rs.getDate(4));
-				listofFoundFlights.add(f);
+				f.setDestination(rs.getString(3));
+				list.add(f);
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return listofFoundFlights;
+		return list;
 	}
 
 	@Override
 	public Flight getFlightById(Integer flightId) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public Integer deleteFlightById(Integer flightId) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = "jdbc:derby:C:/Users/Rajesh/airline";
+		Connection connect = null;
+		PreparedStatement pstmt=null;
+		int result = 0;
+		try {
+			connect = DriverManager.getConnection(url);
+			pstmt = connect.prepareStatement("DELETE FROM flight where flight_id=?");
+			pstmt.setInt(1, flightId);
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
 	public Flight updateFlightById(Flight flight) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = "jdbc:derby:C:/Users/Rajesh/airline";
+String query = 
+"UPDATE flight SET flight_destination=?,flight_departure_Date=?,flight_source=? where flight_id=?";
+		Connection connect = null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			connect = DriverManager.getConnection(url);
+			pstmt = connect.prepareStatement(query);
+			pstmt.setString(1, flight.getSource());
+			pstmt.setDate(2, new Date(flight.getDepartureDate().getTime()));
+			pstmt.setString(3, flight.getDestination());
+			pstmt.setInt(4, flight.getFlightId());
+			
+			int result = pstmt.executeUpdate();
+			if(result==0) {
+				return null;
+			}
+			pstmt.close();
+			connect.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flight;
 	}
 
 }

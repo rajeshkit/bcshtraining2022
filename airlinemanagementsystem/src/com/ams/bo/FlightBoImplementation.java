@@ -18,8 +18,8 @@ public class FlightBoImplementation implements FlightBo {
 	@Override
 	public List<Flight> getAllFlights() {
 		FlightDao fdao=new FlightDaoImplementation();
-		List<Flight> listOfFlight= fdao.getAllFlights();
-		return listOfFlight;
+		List<Flight> list=fdao.getAllFlights();
+		return list;
 	}
 
 	@Override
@@ -31,13 +31,17 @@ public class FlightBoImplementation implements FlightBo {
 	@Override
 	public Integer deleteFlightById(Integer flightId) {
 		// TODO Auto-generated method stub
-		return null;
+		FlightDao fdao = new FlightDaoImplementation();
+		int answer = fdao.deleteFlightById(flightId);
+		return answer;
 	}
 
 	@Override
 	public Flight updateFlightById(Flight flight) {
 		// TODO Auto-generated method stub
-		return null;
+		FlightDao fdao = new FlightDaoImplementation();
+		Flight f = fdao.updateFlightById(flight);
+		return f;
 	}
 
 }
