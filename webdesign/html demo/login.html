@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <script>
+            function passwordValidation(){
+                var e2 = document.getElementById("password").value;
+                var passRegex = /^[a-zA-Z@_]{8,16}$/
+                if(passRegex.test(e2)==false){
+                    document.getElementById("error2").innerText=
+                "wrong format password accepts alphabetical character and @ _";
+                }else{
+                    document.getElementById("error2").innerText=
+                "";
+                }
+            }
+            function userNameValidate(){
+                var e1 = document.getElementById("username").value;
+                var userNameRegex = /^[a-zA-Z ]+$/;
+                if(userNameRegex.test(e1)==false){
+                    document.getElementById("error1").innerText=
+                "username sould contain only alphabetical";
+                return false;
+                }  else{
+                    document.getElementById("error1").innerText="";
+                }
+                
+            }
+           function validate(){
+
+           var e1 = document.getElementById("username").value;
+           var e2 = document.getElementById("password").value;
+           
+            if(e1==""){
+               // alert("username cannot be empty");
+                document.getElementById("error1").innerText=
+                "username cannot be empty";
+                return false;
+            }else{
+                document.getElementById("error1").innerText="";
+            }
+            if(e2==""){
+                document.getElementById("error2").innerText=
+                "password cannot be empty";
+                return false;
+            }else{
+                document.getElementById("error2").innerText="";
+            }
+            return true;
+        }
+        </script>
+    </head>
+    <body>
+        <h1>Login Form</h1>
+        <form onsubmit="return validate()">
+            <label>Username:</label>
+            <input type="text" name="uname" id="username"
+            placeholder="Enter username" onkeyup="userNameValidate()"/>
+            <span style="color: red;" id="error1"></span>
+            <br/><br/>
+            <label>Password:</label>
+            <input type="password" onkeyup="passwordValidation()" name="upass" id="password" 
+            placeholder="Enter password"/>
+            <span style="color: red;" id="error2"></span>
+            <br/><br/>
+            <input type="submit" > 
+        </form>
+    </body>
+</html>

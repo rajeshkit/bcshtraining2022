@@ -1,0 +1,52 @@
+<html>
+    <head>
+       
+        <script>
+             var names = ["abc","bcd","def","rde",56,true];
+     
+             var persons = [{
+                 name:"xyz",
+                 phone:9865777,
+                 email:"xyz@gmail.com",
+                 isEmployee:true
+                },
+                {
+                 name:"tyt",
+                 phone:8977878,
+                 email:"tyt@gmail.com",
+                 isEmployee:false
+                },
+                {
+                 name:"ghh",
+                 phone:98897,
+                 email:"ghh@gmail.com",
+                 isEmployee:true
+             }];
+            //  for (var p in persons) {
+            //      console.log(p);
+            //     console.log(p.name+" "+p.phone+" "+p.email+" "+p.isEmployee);
+            //  }
+             for (const person of persons) {
+                 console.log(person.name+" "+person.isEmployee+" "+person.phone);
+             }
+             console.log("*************************");
+            for (let index = 0; index < names.length; index++) {
+                const element = names[index];
+                console.log(element);
+                
+            }
+            console.log("*************************");
+            for (const x of names) {
+                console.log(x);
+            }
+            console.log("*************************");
+            for (const key in names) {
+                console.log(key+" "+names[key]);
+                
+            }
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
