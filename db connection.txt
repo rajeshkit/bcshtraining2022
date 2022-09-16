@@ -1,0 +1,56 @@
+JDBC connection steps for dyanmic web project:-
+	
+Step 1: Load the Driver class
+	Class.forName("packagename.Driver");
+	Eg:-
+	Derby - Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+	MySql - Class.forName("com.mysql.cj.jdbc.Driver");
+
+Step 2: Create Connection by calling getConnection method
+	Connection con = DriverManager.getConnection(url,username,pass);
+	Derby -Connection con = DriverManager.getConnection	       	("jdbc:derby:dbname"); 
+	Mysql - Connection con = DriverManager.getConnection	       			("jdbc:mysql://localhost:3306/dbname","username","pass");
+Step 3: 
+	Create statement or preparedstatement and execute the query
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface ProductBo{
+	public String createProduct(Product product);
+	public List<Product> getAllProducts();
+	public Product getProductById(Integer productId);
+	public String deleteByProductId(Integer productId);
+	public String updateProductById(Integer productId);
+}
+
+interface ProductDao{
+	public String createProduct(Product product);
+	public List<Product> getAllProducts();
+	public Product getProductById(Integer productId);
+	public String deleteByProductId(Integer productId);
+	public String updateProductById(Integer productId);
+}
+class Product{
+	private Integer productId;
+	private String productName;
+	private Integer productPrice;
+	private Date manufactured_Date;
+}
+
+
+
+
