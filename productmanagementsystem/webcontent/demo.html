@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+		function loadData(){
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "http://localhost:9090/pms/student.json",
+					true);
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var val = JSON.parse(this.responseText);
+					var x=document.getElementById("content");
+					for ( var obj of val.students) {
+						var text=document.createTextNode(obj.id);
+						x.appendChild(text);
+						var text1=document.createTextNode(obj.name);
+						x.appendChild(text1);
+						var text2=document.createTextNode(obj.lastname);
+						x.appendChild(text2);
+						
+					}
+			}
+			}
+		}
+</script>
+</head>
+<body>
+<div id="content"></div>
+<p onclick="loadData()">Click</p>
+</body>
+</html>
